@@ -23,7 +23,7 @@ module SimpleSlack
       json = create_message_json(channel, username, msg, icon, notify_level)
       headers = HTTP::Headers.new
       headers["Content-type"] = "application/x-www-form-urlencoded"
-      p HTTP::Client.post(@incomming_hook_url, body: URI.escape("payload=#{json}"), headers: headers)
+      HTTP::Client.post(@incomming_hook_url, body: URI.escape("payload=#{json}"), headers: headers)
     end
 
     def create_message_json(channel, username, msg, icon, notify_level : (NotifyLevel | String) = NotifyLevel::NONE)
