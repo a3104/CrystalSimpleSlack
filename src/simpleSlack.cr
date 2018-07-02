@@ -23,14 +23,14 @@ module SimpleSlack
       json = create_message_json(channel, username, msg, icon, notify_level)
       headers = HTTP::Headers.new
       headers["Content-type"] = "application/x-www-form-urlencoded"
-      HTTP::Client.post(@incomming_hook_url, body: URI.escape("payload=#{json}"), headers: headers)
+      HTTP::Client.post(@incomming_hook_url, body: "payload=#{json}", headers: headers)
     end
 
     def create_message_json(channel, username, msg, icon, notify_level : (NotifyLevel | String) = NotifyLevel::NONE)
       hash = Hash(String, String).new
       hash["channel"] = channel
       hash["username"] = username
-      hash["text"] = msg
+      hash["text"] = URI.escape(msg)
       hash["icon_emoji"] = icon
 
       if notify_level.is_a?(NotifyLevel) && notify_level != NotifyLevel::NONE
