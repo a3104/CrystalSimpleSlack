@@ -1,6 +1,7 @@
 require "./simpleSlack/*"
 require "http/client"
 require "json"
+require "uri"
 
 # TODO: Write documentation for `SimpleSlack`
 
@@ -20,10 +21,9 @@ module SimpleSlack
 
     def send(channel, username, msg, icon, notify_level : (NotifyLevel | String) = NotifyLevel::NONE)
       json = create_message_json(channel, username, msg, icon, notify_level)
-      p "payload=#{json}"
       headers = HTTP::Headers.new
       headers["Content-type"] = "application/x-www-form-urlencoded"
-      p HTTP::Client.post(@incomming_hook_url, body: "payload=#{json}", headers: headers)
+      p HTTP::Client.post(@incomming_hook_url, body: URI.escape("payload=#{json}"), headers: headers)
     end
 
     def create_message_json(channel, username, msg, icon, notify_level : (NotifyLevel | String) = NotifyLevel::NONE)
