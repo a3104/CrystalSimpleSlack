@@ -1,0 +1,9 @@
+name: simpleSlack
+version: 0.1.0
+
+authors:
+  - abe <a3104@accelia.net>
+
+crystal: 0.25.0
+
+license: MIT
