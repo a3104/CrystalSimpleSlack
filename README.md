@@ -1,7 +1,5 @@
 # simpleSlack
 
-TODO: Write a description here
-
 ## Installation
 
 Add this to your application's `shard.yml`:
@@ -26,7 +24,7 @@ require "simpleSlack"
 
 ## Contributing
 
-1. Fork it (<https://github.com/a3104/simpleSlack/fork>)
+1. Fork it (<https://github.com/a3104/CrystalSimpleSlack/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
