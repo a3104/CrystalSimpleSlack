@@ -1,5 +1,7 @@
 # simpleSlack
 
+[![Build Status](https://travis-ci.org/a3104/CrystalSimpleSlack.svg?branch=master)](https://travis-ci.org/a3104/CrystalSimpleSlack)
+
 ## Installation
 
 Add this to your application's `shard.yml`:
