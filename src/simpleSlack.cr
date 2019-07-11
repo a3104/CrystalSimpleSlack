@@ -27,21 +27,24 @@ module SimpleSlack
     end
 
     def create_message_json(channel, username, msg, icon, notify_level : (NotifyLevel | String) = NotifyLevel::NONE)
-      hash = Hash(String, String).new
+      hash = Hash(String, (String | Array(Hash(String, String)))).new
       hash["channel"] = channel
       hash["username"] = username
-      hash["text"] = URI.escape(msg)
-      hash["icon_emoji"] = icon
 
       if notify_level.is_a?(NotifyLevel) && notify_level != NotifyLevel::NONE
-        hash["color"] = @@NotifyLevelStr[notify_level.value]
+        hash["attachments"] = [{"color" => @@NotifyLevelStr[notify_level.value], "title" => username, "pretext" => username, "text" => URI.escape(msg), "author_icon" => icon}]
+        return hash.to_json
       end
 
       if notify_level.is_a?(String) && notify_level != ""
-        hash["color"] = notify_level
+        hash["attachments"] = [{"color" => notify_level, "title" => username, "pretext" => username, "text" => URI.escape(msg), "author_icon" => icon}]
+        return hash.to_json
       end
 
-      hash.to_json
+      hash["text"] = URI.escape(msg)
+      hash["icon_emoji"] = icon
+
+      return p hash.to_json
     end
   end
 end
