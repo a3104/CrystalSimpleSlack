@@ -12,7 +12,7 @@ module SimpleSlack
       response = HTTP::Client.get("#{@base_url}?token=#{@token}")
       raise "failed statusCode #{response.status_code} slack list api" unless response.status_code.to_s == "200"
       @body = JSON.parse(response.body)
-      @channel_id_hash = @body["channels"].as_a.map { |channel| [channel["name"].as_s, channel["id"].as_s] }.to_h
+      @channel_id_hash = @body["groups"].as_a.map { |channel| [channel["name"].as_s, channel["id"].as_s] }.to_h
     end
 
     def get_id_by_name?(channel_name)
